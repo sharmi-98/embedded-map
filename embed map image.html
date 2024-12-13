@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Map Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        img {
+            display: block;
+            margin: 0 auto;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        img:hover {
+            transform: scale(1.05);
+        }
+        #infobox {
+            display: none;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .highlight {
+            background-color: #e0f7fa;
+            transition: background-color 0.5s;
+        }
+    </style>
+    <script>
+        function showInfo(info) {
+            const infobox = document.getElementById('infobox');
+            infobox.innerHTML = info;
+            infobox.style.display = 'block';
+        }
+        
+        function hideInfo() {
+            const infobox = document.getElementById('infobox');
+            infobox.style.display = 'none';
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const areas = document.querySelectorAll('area');
+            areas.forEach(area => {
+                area.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const sectionId = this.getAttribute('data_section');
+                    const targetSection = document.getElementById(sectionId);
+                    showInfo(targetSection.innerHTML);
+                    targetSection.classList.add('highlight');
+                    setTimeout(() => {
+                        targetSection.classList.remove('highlight');
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Image Map Example</h1>
+    <img src="https://i.ytimg.com/vi/odazci8bbyw/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD145F-Z0xoEqsLlRF7XpxARwswVA" alt="map" usemap="#image_map" style="width:600px; height:auto;">
+    
+    <map name="image_map">
+        <area shape="circle" coords="50,50,150,150" href="#" alt="hotspot1" data_section="hotspot1_info">
+        <area shape="rect" coords="300,200,61" href="#" alt="hotspot2" data_section="hotspot2_info">
+        <area shape="Elliptical" coords="200,300,300,400,250,450" href="#" alt="hotspot3" data_section="hotspot3_info">
+		 <area shape="Oval" coords="300,20, 6,900, 500,500" href="#" alt="hotspot4" data_section="hotspot4_info">
+    </map>
+    
+    <div id="infobox"></div>
+    
+    <section id="hotspot1_info" style="display:none;">
+        <h2>This is Canada</h2>
+        <p>Canada is a country in North America and is known for its vast landscapes and multicultural cities.</p>
+    </section>
+    
+    <section id="hotspot2_info" style="display:none;">
+        <h2>This is the US</h2>
+        <p>The US is a country of 50 states covering a vast area of North America.</p>
+    </section>
+    
+    <section id="hotspot3_info" style="display:none;">
+        <h2>This is Greenland</h2>
+        <p>Greenland is an autonomous territory within the Kingdom of Denmark, known for its vast ice sheets.</p>
+    </section>
+	<section id="hotspot4_info" style="display:none;">
+        <h2>This is island</h2>
+        <p>island is an autonomous territory within the Kingdom of Denmark, known for its vast ice sheets.</p>
+    </section>
+</body>
+</html>
